@@ -3,7 +3,7 @@ class_name AbstractCharacter
 
 @export var speed:float = 300.0
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	var direction = Vector2.ZERO
 	if Input.is_action_pressed(("character_up")):
 		direction.y += -1
@@ -13,10 +13,10 @@ func _physics_process(delta):
 		direction.x += -1
 	if Input.is_action_pressed(("character_right")):
 		direction.x += 1
-		
+
 	velocity = direction.normalized() * speed
 	move_and_slide()
 
-func lose_player_health():
+func lose_player_health() -> void:
 	queue_free()
 

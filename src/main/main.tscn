@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://p11tv54hqclr"]
+
+[ext_resource type="Script" path="res://src/main/main.gd" id="1_vauws"]
+[ext_resource type="PackedScene" uid="uid://kp1l1j4p1v0l" path="res://src/enemies/manager/enemy_manager.tscn" id="3_pabj2"]
+[ext_resource type="PackedScene" uid="uid://p3d2giphc5wu" path="res://src/characters/character_1/character_1.tscn" id="3_r38ku"]
+[ext_resource type="PackedScene" uid="uid://ch2ar1xjib3c1" path="res://src/projectiles/projectile_manager/projectile_manager.tscn" id="4_bgy7u"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_vauws")
+
+[node name="EnemyManager" parent="." instance=ExtResource("3_pabj2")]
+unique_name_in_owner = true
+
+[node name="ProjectileManager" parent="." instance=ExtResource("4_bgy7u")]
+unique_name_in_owner = true
+
+[node name="character1" parent="." instance=ExtResource("3_r38ku")]
+position = Vector2(571, 540)
+
+[connection signal="new_projectile" from="character1" to="ProjectileManager" method="_on_character_1_new_projectile"]
