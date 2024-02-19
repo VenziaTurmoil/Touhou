@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://p3d2giphc5wu"]
+
+[ext_resource type="Script" path="res://src/characters/character_1/character_1.gd" id="1_1cjfm"]
+[ext_resource type="Texture2D" uid="uid://b8p1ro1mjuqlv" path="res://icon.svg" id="2_efdwu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g3m7u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_efdwu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4foth"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_knw8m"]
+
+[node name="character1" type="CharacterBody2D"]
+script = ExtResource("1_1cjfm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_g3m7u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4foth")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_knw8m")
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]

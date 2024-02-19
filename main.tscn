@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://p11tv54hqclr"]
+
+[ext_resource type="PackedScene" uid="uid://bri1a7buec36a" path="res://src/characters/abstract_character/abstract_character.tscn" id="1_0hceo"]
+[ext_resource type="PackedScene" uid="uid://c4u1xuwnggolx" path="res://src/projectiles/abstract_projectile/abstract_projectile.tscn" id="2_slxjr"]
+
+[node name="Main" type="Node2D"]
+
+[node name="AbstractCharacter" parent="." instance=ExtResource("1_0hceo")]
+
+[node name="AbstractProjectile" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_slxjr")]
+position = Vector2(1066, -1)
+speed = 400.0
+aiming = 0.005
+target = NodePath("../AbstractCharacter")
