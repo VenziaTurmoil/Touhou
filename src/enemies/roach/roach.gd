@@ -14,9 +14,15 @@ func _physics_process(delta) -> void:
 	position += direction.normalized() * speed * delta
 	#Remplacer par move and slide
 
-func init(p_speed:float, p_aiming:float, p_direction:Vector2, p_target:AbstractCharacter) -> Roach:
-	speed = p_speed
-	aiming = p_aiming
-	direction = p_direction
-	target=p_target
+func init(args:Dictionary) -> Roach:
+	if 'speed' in args:
+		speed = args['speed']
+	if 'aiming' in args:
+		aiming = args['aiming']
+	if 'position' in args:
+		position = args['position']
+	if 'direction' in args:
+		direction = args['direction']
+	if 'target' in args:
+		target = args['target']
 	return self

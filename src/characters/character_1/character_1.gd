@@ -1,8 +1,15 @@
 extends AbstractCharacter
 
-signal new_projectile(proj)
+signal new_projectile(projectileClass, args)
+
+@onready var attackTimer = %AttackTimer
 
 func _on_timer_timeout():
-	var proj:AbstractProjectile = preload("res://src/projectiles/abstract_projectile/abstract_projectile.tscn").instantiate()
-	proj.init(position, 600, 0, Vector2(0, -1), null, AbstractProjectile.targetEnemy)
-	new_projectile.emit(proj)
+	attack_ready = true
+	attackTimer.stop()
+
+func shoot():
+	attackTimer.start()
+	var projectileType = "MagicMissile"
+	var projectileArgs = {'position': position, 'speed': 600, 'direction': Vector2(0, -1), 'targetGroup': AbstractProjectile.targetEnemy}
+	new_projectile.emit(projectileType, projectileArgs)
