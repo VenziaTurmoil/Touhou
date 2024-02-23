@@ -24,3 +24,12 @@ func lose_player_health() -> void:
 func shoot() -> void:
 	pass
 
+func add_attack(attack: AbstractAttack, projectileManager: ProjectileManager) -> void:
+	attacks.append(attack)
+	add_child(attack)
+	attack.new_projectile.connect(projectileManager.spawn)
+
+func rm_attack(attack: AbstractAttack) -> void:
+	if attack in attacks:
+		attacks.erase(attack)
+		attack.queue_free()

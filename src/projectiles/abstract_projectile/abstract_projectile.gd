@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 class_name AbstractProjectile
 
 const targetEnemy:String = "targetEnemy"
@@ -8,11 +8,9 @@ const targetCharacter:String = "targetCharacter"
 var direction:Vector2 = Vector2.ZERO
 @export var targetGroup:String = targetCharacter
 @export var damage:int = 1
-var collision:Area2D = null
 
 func _ready():
-	collision = get_node("Area2D")
-	collision.body_entered.connect(on_area_2d_body_entered)
+	body_entered.connect(on_area_2d_body_entered)
 
 func init(args: Dictionary) -> AbstractProjectile:
 	if 'position' in args:
@@ -29,6 +27,9 @@ func init(args: Dictionary) -> AbstractProjectile:
 
 func on_area_2d_body_entered(body):
 	if body.has_method("take_damage") && body.is_in_group(targetGroup):
-		print("body entered")
 		body.take_damage(damage)
 		queue_free()
+
+func out_of_bounds():
+	print("projectile oob")
+	queue_free()
